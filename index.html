@@ -45,11 +45,22 @@
                </td>
            </tr>
            <tr>
+            <tr>
+                <td></td>
+                <td>
+                    <span>*</span>Are you applying for New PANCARD
+
+                    <label for="panyes" style="padding-left: 70px;">Yes</label>
+                    <input type="radio" name="pancheck" id="panyes" value="true" onchange="panYesChange()" >
+                    <label for="panno" style="padding-left: 30px;">No</label>
+                    <input type="radio" name="pancheck" id="panno" value="false" onchange="panNoChange()">
+                </td>
+            </tr>
             <td></td>
             <td>
-                <span>*</span>Permanent Account Number(PAN)
+                <span></span>Permanent Account Number(PAN)
                 <label for="pno"></label>
-                <input type="text" name="pannumber" id="pno" onchange="panNumberCheck()" required>
+                <input type="text" name="pannumber" id="pno" onchange="panNumberCheck()">
             </td>
             <tr>
                 <td style="width: 1%; padding: 3px;"><input type="checkbox" name="appname" id="name"></td>
@@ -475,7 +486,7 @@
                         <div>
                             Email Id
                         </div>
-                        <div style="border-left: 1px solid black;"><input type="text" style="padding-left: 50px;"></div>
+                        <div style="border-left: 1px solid black;"><input type="text" style="padding-left: 50px;" id="emailid" onchange="emailIdValidation()"></div>
                     </div>
                 </td>
             </tr>
