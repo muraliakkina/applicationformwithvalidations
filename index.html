@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAN Application</title>
+    
 </head>
 <style>
     *{
@@ -26,7 +27,7 @@
     }
 </style>
 <body>
-  <form action="" onsubmit="foo()">
+  <form action="" name="panapplication" onsubmit="return formValidate()"  > 
     <div style="background-color: rgb(90, 17, 17); color: white; text-align: center;">
         <h4>Request For New PAN Card or/And change or/Corrections in PAN</h4>
         <p style="font-family: italic; font-weight: 300;">Fields Marked with <span>*</span>(asterisk) are mandatory. To avoid Misake(s), Please refer <u style="color: coral;">guidelines</u> and <u style="color: coral;">Instructions</u></p>
@@ -48,7 +49,7 @@
             <td>
                 <span>*</span>Permanent Account Number(PAN)
                 <label for="pno"></label>
-                <input type="text" name="" id="pno" required>
+                <input type="text" name="pannumber" id="pno" onchange="panNumberCheck()" required>
             </td>
             <tr>
                 <td style="width: 1%; padding: 3px;"><input type="checkbox" name="appname" id="name"></td>
@@ -71,16 +72,16 @@
                 <td>
                     <div style="column-count: 3; column-width: 33.33%;">
                         <div>
-                            <label for="lname" style="padding-left: 2px;">Surnma/LastName</label><br>
-                            <input type="text" name="appname" id="lname">
+                            <label for="lname" style="padding-left: 2px;">Surname/LastName</label><br>
+                            <input type="text" name="appname" id="uLName" onchange = "uLastName()" required>
                         </div>
                         <div>
                             <label for="fname" style="padding-left: 25px;">FirstName</label><br>
-                            <input type="text" name="appname" id="fname">
+                            <input type="text" name="appname" id="uFName" onchange = "uFirstName()" required>
                         </div>
                         <div>
                             <label for="mname" style="padding-left: 25px;">MiddleName</label><br>
-                            <input type="text" name="appname" id="mname">
+                            <input type="text" name="appname" id="uMName" onchange = "uMiddleName()"  >
                         </div>
                     </div>
                 </td>
@@ -94,7 +95,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <input type="text" name="" style="padding-left: 80px;">
+                    <input type="text" name="" style="padding-left: 80px;" class="nameCheck"onchange = "nameCheck()" required>
                 </td>
             </tr>
             <tr>
@@ -130,16 +131,16 @@
                 <td>
                     <div style="column-count: 3; column-width: 33.33%;">
                         <div>
-                            <label for="lname" style="padding-left: 2px;">Surnma/LastName</label><br>
-                            <input type="text" name="fathername" id="lname">
+                            <label for="lname" style="padding-left: 2px;">Surname/LastName</label><br>
+                            <input type="text" name="fathername" id="fLName" onchange = "fLastName()" required>
                         </div>
                         <div>
                             <label for="fname" style="padding-left: 25px;">FirstName</label><br>
-                            <input type="text" name="fathername" id="fname">
+                            <input type="text" name="fathername" id="fFName" onchange = "fFirstName()" required>
                         </div>
                         <div>
                             <label for="mname" style="padding-left: 25px;">MiddleName</label><br>
-                            <input type="text" name="fathername" id="mname">
+                            <input type="text" name="fathername" id="fMName" onchange = "fMiddleName()" >
                         </div>
                     </div>
                 </td>
@@ -155,16 +156,16 @@
                 <td>
                     <div style="column-count: 3; column-width: 33.33%;">
                         <div>
-                            <label for="lname" style="padding-left: 2px;">Surnma/LastName</label><br>
-                            <input type="text" name="mothername" id="lname">
+                            <label for="lname" style="padding-left: 2px;">Surname/LastName</label><br>
+                            <input type="text" name="mothername"   id="mLName" onchange = "mLastName()" required>
                         </div>
                         <div>
                             <label for="fname" style="padding-left: 25px;">FirstName</label><br>
-                            <input type="text" name="mothername" id="fname">
+                            <input type="text" name="mothername" id="mFName" onchange = "mFirstName()" required>
                         </div>
                         <div>
                             <label for="mname" style="padding-left: 25px;">MiddleName</label><br>
-                            <input type="text" name="mothername" id="mname">
+                            <input type="text" name="mothername" id="mMName" onchange = "mMiddleName()" >
                         </div>
                     </div>
                 </td>
@@ -199,7 +200,7 @@
                     </div>
                     <div style="border-left: 1px solid black;">
                         <label for="dob" >Date of Birth</label><br>
-                        <input type="date" name="dob" id="dob" required>
+                        <input type="date" placeholder="please enter in dd/mm/yyyy format" size="35px" name="dob" id="dob" onchange="dateCheck()" required>
                     </div>
                     </div>
                 </td>
@@ -395,7 +396,7 @@
                             PIN Code  <a style="color: blue; font-weight: lighter;">(Indicating PIN is Mandatory)</a>
                         </div>
                         <div style="border-left: 1px solid black;">
-                            <input type="text" style="padding-left: 50px;">
+                            <input type="text"  id="pin" onchange = "pinCheck()" required>
                         </div>
                     </div>
                 </td>
@@ -452,15 +453,15 @@
                         </div>
                         <div style="border-left: 1px solid black;">
                             Country Code(ISD Code) <br>
-                                <input type="text" required>
+                                <input type="text" class="number" required>
                                 <table style="width:100%;">
                                     <tr>
-                                        <td><label for="mob" style="padding-left: 20px;">MobileNo</label><input type="radio" name="phone" id="mob"></td>
-                                        <td><label for="tel">Telephone No</label><input type="radio" id="tel" name="phone"></td>
+                                        <td><label for="mob" style="padding-left: 20px;">MobileNo</label><input type="radio" name="phone" id="mob" class="number"  ></td>
+                                        <td><label for="tel">Telephone No</label><input type="radio" id="tel" name="phone" class="number" ></td>
                                     </tr>
                                     <tr>
-                                        <td>Area Std Code <br><input type="text"></td>
-                                        <td>telephoneNo/MobileNo <br><input type="text"></td required>
+                                        <td>Area Std Code <br><input type="text" class="number"  ></td>
+                                        <td>telephoneNo/MobileNo <br><input type="text" class="number"  ></td>
                                     </tr>
                                 </table>
                         </div>
@@ -504,7 +505,7 @@
                             <span>*</span> 12. AADHAAR No:
                         </div>
                         <div style="border-left: 1px solid  black;">
-                            <input type="text" style="padding-left: 50px;" required><p style="color: blue;">In case AADHAAR is provided,then proof of aadhar along with the supported documents submitted to NSDL.</p>
+                            <input type="text" size="40px" id="adharveri" onchange="aadharCheck()" required><p style="color: blue;">In case AADHAAR is provided,then proof of aadhar along with the supported documents submitted to NSDL.</p>
                         </div>          
                     </div>
                 </td>
@@ -546,10 +547,10 @@
                 <td>
                     <div style="column-count: 2;">
                         <div>
-                            PAN1 <input type="text">
+                            PAN1 <input type="text" class="number"  >
                         </div>
                         <div style="border-left: 1px solid black;">
-                            PAN2 <input type="text">
+                            PAN2 <input type="text" class="number"  >
                         </div>
                     </div>
                 </td>
@@ -559,10 +560,10 @@
                 <td>
                     <div style="column-count: 2;">
                         <div>
-                            PAN3 <input type="text">
+                            PAN3 <input type="text" class="number"  >
                         </div>
                         <div style="border-left: 1px solid black;">
-                            PAN4 <input type="text">
+                            PAN4 <input type="text" class="number"  >
                         </div>
                     </div>
                 </td>
@@ -584,7 +585,7 @@
                 <td></td> <td>Place <input type="text" style="padding-left: 50px;" required></td>
             </tr>
             <tr>
-                <td></td> <td>Verified Today <input type="date" required></td>
+                <td></td> <td>Verified Today <input type="date" size="45px" id="today" onchange="todayCheck()" placeholder="please enter today date in dd/mm/yyyy format" required></td>
             </tr>
             <tr>
                 <td></td> <td>
@@ -676,14 +677,10 @@
             <div style="margin-top: 20px;">Already uploded documents</div>
             <div><textarea cols="50" rows="5" style="resize: none;"></textarea></div>
          </div>
-         <p style="text-align: center; margin-left: 400px;"><input type="submit" value="submit"><input type="reset" value="reset"></p>
+         <p style="text-align: center; margin-left: 400px;"><button type="submit" value="Submit">Submit</button><button type="reset">Reset</button></p>
         </div>
     </div>
   </form>
-    <script>
-        function foo(){
-            alert('Thank you for submitting the form')
-        }
-    </script>  
 </body>
+<script  src="index.js"></script>
 </html>
